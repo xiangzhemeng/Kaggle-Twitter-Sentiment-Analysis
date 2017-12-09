@@ -1,3 +1,0 @@
-regex==2017.11.9
-gensim==3.1.0
-fasttext==0.8.3
