@@ -50,6 +50,7 @@ print("Fit model finished!")
 
 y_pred = model.predict_proba(test_sequences)
 print("Prediction finished!")
+print("length="+len(y_pred))
 
 y_pred = 1 - 2 * y_pred
 with open('cnn_submission.csv', 'w') as csvfile:
