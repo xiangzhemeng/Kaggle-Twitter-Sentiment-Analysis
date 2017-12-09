@@ -12,6 +12,8 @@ from keras.preprocessing import sequence
 
 X_train = pd.read_pickle("train_with_preprocessing.p")
 X_test = pd.read_pickle("test_with_preprocessing.p")
+print(X_train.shape)
+print(X_test.shape)
 
 tokenizer = Tokenizer(filters='')
 tokenizer.fit_on_texts(X_train)
@@ -48,7 +50,7 @@ print("Build model finished!")
 model.fit(train_sequences, y, validation_split=0.1, epochs=1, batch_size=128, verbose=0, shuffle=True)
 print("Fit model finished!")
 
-y_pred = model.predict(test_sequences)
+y_pred = model.predict_proba(test_sequences)
 print("Prediction finished!")
 print(y_pred)
 
