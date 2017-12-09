@@ -19,20 +19,20 @@ tokenizer = Tokenizer(filters='')
 tokenizer.fit_on_texts(X_train)
 word_index = tokenizer.word_index
 max_features = len(word_index)
-X_train = tokenizer.texts_to_sequences(X_train)
-X_test = tokenizer.texts_to_sequences(X_test)
+train_sequences = tokenizer.texts_to_sequences(X_train)
+test_sequences = tokenizer.texts_to_sequences(X_test)
 print('Tokenization finished!')
 
 # Shuffle training dataset
-indices = np.arange(X_train.shape[0])
+indices = np.arange(train_sequences.shape[0])
 np.random.shuffle(indices)
-train_sequences = X_train[indices]
-y = np.array(int(X_train.shape[0]/2) * [0] + int(X_train.shape[0]/2) * [1])
+train_sequences = train_sequences[indices]
+y = np.array(int(2500000/2) * [0] + int(2500000/2) * [1])
 y = y[indices]
 
 # CNN model
 model = Sequential()
-model.add(Embedding(max_features+1, 50, input_length=X_train.shape[1]))
+model.add(Embedding(max_features+1, 50, input_length=train_sequences.shape[1]))
 model.add(Convolution1D(nb_filter=32, filter_length=3, border_mode='same', activation='relu'))
 model.add(MaxPooling1D(pool_length=2))
 model.add(LSTM(100))
@@ -42,10 +42,10 @@ print(model.summary())
 print("Build model finished!")
 
 
-model.fit(X_train, y, validation_split=0.1, nb_epoch=1, batch_size=128, verbose=1, shuffle=True)
+model.fit(train_sequences, y, validation_split=0.1, nb_epoch=1, batch_size=128, verbose=1, shuffle=True)
 print("Fit model finished!")
 
-y_pred = model.predict_proba(X_test)
+y_pred = model.predict_proba(test_sequences)
 print("Prediction finished!")
 
 y_pred = 1 - 2 * y_pred
