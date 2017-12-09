@@ -11,11 +11,11 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 
 X_train = pd.read_pickle("train_tweets_after_preprocess_cnn.pkl")
+X_train = np.array(X_train['tweet'])
 X_test = pd.read_pickle("test_tweets_after_preprocess.pkl")
-print(X_train.shape)
-print(X_test.shape)
+X_test = np.array(X_test['tweet'])
 
-tokenizer = Tokenizer()
+tokenizer = Tokenizer(filters='')
 tokenizer.fit_on_texts(X_train)
 word_index = tokenizer.word_index
 max_features = len(word_index)
@@ -26,8 +26,8 @@ test_sequences = tokenizer.texts_to_sequences(X_test)
 print('Tokenization finished!')
 
 print('Pad sequences (samples x time)')
-train_sequences = sequence.pad_sequences(train_sequences)
-test_sequences = sequence.pad_sequences(test_sequences)
+train_sequences = sequence.pad_sequences(train_sequences, maxlen=30)
+test_sequences = sequence.pad_sequences(test_sequences, maxlen=30)
 print('train_sequences shape:', train_sequences.shape)
 print('test_sequences shape:', test_sequences.shape)
 
