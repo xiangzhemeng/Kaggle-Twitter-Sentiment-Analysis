@@ -3,7 +3,7 @@ import numpy as np
 import csv
 from keras.models import Sequential
 from keras.layers import Dense
-from keras.layers.convolutional import Convolution1D
+from keras.layers.convolutional import Conv1D
 from keras.layers.convolutional import MaxPooling1D
 from keras.layers.embeddings import Embedding
 from keras.layers import LSTM
@@ -36,8 +36,8 @@ y = y[indices]
 # CNN model
 model = Sequential()
 model.add(Embedding(max_features+1, 50, input_length=train_sequences.shape[1]))
-model.add(Convolution1D(nb_filter=32, filter_length=3, border_mode='same', activation='relu'))
-model.add(MaxPooling1D(pool_length=2))
+model.add(Conv1D(padding="same", kernel_size=3, filters=32, activation="relu"))
+model.add(MaxPooling1D(pool_size=2))
 model.add(LSTM(100))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
