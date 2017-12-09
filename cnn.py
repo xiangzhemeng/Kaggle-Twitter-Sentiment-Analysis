@@ -15,7 +15,7 @@ X_test = pd.read_pickle("test_tweets_after_preprocess.pkl")
 print(X_train.shape)
 print(X_test.shape)
 
-tokenizer = Tokenizer(filters='')
+tokenizer = Tokenizer()
 tokenizer.fit_on_texts(X_train)
 word_index = tokenizer.word_index
 max_features = len(word_index)
