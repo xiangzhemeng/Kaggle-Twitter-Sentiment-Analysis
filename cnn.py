@@ -10,8 +10,8 @@ from keras.layers import LSTM
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 
-X_train = pd.read_pickle("train_with_preprocessing.p")
-X_test = pd.read_pickle("test_with_preprocessing.p")
+X_train = pd.read_pickle("train_tweets_after_preprocess_cnn.pkl")
+X_test = pd.read_pickle("test_tweets_after_preprocess.pkl")
 print(X_train.shape)
 print(X_test.shape)
 
@@ -19,10 +19,13 @@ tokenizer = Tokenizer(filters='')
 tokenizer.fit_on_texts(X_train)
 word_index = tokenizer.word_index
 max_features = len(word_index)
+print('Found %s unique tokens.' % max_features)
+
 train_sequences = tokenizer.texts_to_sequences(X_train)
 test_sequences = tokenizer.texts_to_sequences(X_test)
 print('Tokenization finished!')
 
+print('Pad sequences (samples x time)')
 train_sequences = sequence.pad_sequences(train_sequences, maxlen=30)
 test_sequences = sequence.pad_sequences(test_sequences, maxlen=30)
 print('train_sequences shape:', train_sequences.shape)
