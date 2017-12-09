@@ -21,12 +21,13 @@ word_index = tokenizer.word_index
 max_features = len(word_index)
 X_train = tokenizer.texts_to_sequences(X_train)
 X_test = tokenizer.texts_to_sequences(X_test)
+print('Tokenization finished!')
 
 # Shuffle training dataset
-indices = np.arange(X_train.shape[0])
+indices = np.arange(len(X_train))
 np.random.shuffle(indices)
 train_sequences = X_train[indices]
-y = np.array(int(X_train.shape[0]/2) * [0] + int(X_train.shape[0]/2) * [1])
+y = np.array(int(len(X_train)/2) * [0] + int(len(X_train)/2) * [1])
 y = y[indices]
 
 # CNN model
