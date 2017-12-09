@@ -10,10 +10,10 @@ from keras.layers import LSTM
 from keras.preprocessing.text import Tokenizer
 
 X_train = pd.read_pickle("train_with_preprocessing.p")
-X_train = X_train['clean_tweets']
+#X_train = X_train['clean_tweets']
 
 X_test = pd.read_pickle("test_with_preprocessing.p")
-X_test = X_test['clean_tweets']
+#X_test = X_test['clean_tweets']
 
 tokenizer = Tokenizer(filters='')
 tokenizer.fit_on_texts(X_train)
@@ -24,10 +24,10 @@ X_test = tokenizer.texts_to_sequences(X_test)
 print('Tokenization finished!')
 
 # Shuffle training dataset
-indices = np.arange(len(X_train))
+indices = np.arange(X_train.shape[0])
 np.random.shuffle(indices)
 train_sequences = X_train[indices]
-y = np.array(int(len(X_train)/2) * [0] + int(len(X_train)/2) * [1])
+y = np.array(int(X_train.shape[0]/2) * [0] + int(X_train.shape[0]/2) * [1])
 y = y[indices]
 
 # CNN model
