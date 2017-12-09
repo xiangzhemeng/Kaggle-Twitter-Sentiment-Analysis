@@ -54,9 +54,15 @@ print("Build model finished!")
 model.fit(train_sequences, y, validation_split=0.1, epochs=1, batch_size=128, verbose=1, shuffle=True)
 print("Fit model finished!")
 
-#y_pred = model.predict_proba(test_sequences)
-y_pred = model.predict(test_sequences)
+y_pred_origin = model.predict_proba(test_sequences)
 print("Prediction finished!")
+print(y_pred_origin)
+y_pred = []
+for x in y_pred_origin:
+    if x[0] > 0.5:
+        y_pred.append(1)
+    else:
+        y_pred.append(0)
 print(y_pred)
 
 y_pred = 1 - 2 * y_pred
@@ -66,3 +72,4 @@ with open('cnn_submission.csv', 'w') as csvfile:
     writer.writeheader()
     for r1, r2 in zip(np.arange(1,10001), y_pred):
         writer.writerow({'Id': int(r1), 'Prediction': int(r2)})
+print("Submission file generated!")
