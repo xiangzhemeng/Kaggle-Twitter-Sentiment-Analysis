@@ -10,9 +10,9 @@ from keras.layers import LSTM
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 
-X_train = pd.read_pickle("train_with_preprocessing.pkl")
+X_train = pd.read_pickle("train_with_preprocessing.p")
 X_train = np.array(X_train['clean_tweets'])
-X_test = pd.read_pickle("test_with_preprocessing.pkl")
+X_test = pd.read_pickle("test_with_preprocessing.p")
 X_test = np.array(X_test['clean_tweets'])
 
 tokenizer = Tokenizer(filters='')
