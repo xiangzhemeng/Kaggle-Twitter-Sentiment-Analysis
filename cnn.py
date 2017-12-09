@@ -8,12 +8,10 @@ from keras.layers.convolutional import MaxPooling1D
 from keras.layers.embeddings import Embedding
 from keras.layers import LSTM
 from keras.preprocessing.text import Tokenizer
+from keras.preprocessing import sequence
 
 X_train = pd.read_pickle("train_with_preprocessing.p")
-#X_train = X_train['clean_tweets']
-
 X_test = pd.read_pickle("test_with_preprocessing.p")
-#X_test = X_test['clean_tweets']
 
 tokenizer = Tokenizer(filters='')
 tokenizer.fit_on_texts(X_train)
@@ -22,6 +20,11 @@ max_features = len(word_index)
 train_sequences = tokenizer.texts_to_sequences(X_train)
 test_sequences = tokenizer.texts_to_sequences(X_test)
 print('Tokenization finished!')
+
+train_sequences = sequence.pad_sequences(train_sequences, maxlen=30)
+test_sequences = sequence.pad_sequences(test_sequences, maxlen=30)
+print('train_sequences shape:', train_sequences.shape)
+print('test_sequences shape:', test_sequences.shape)
 
 # Shuffle training dataset
 indices = np.arange(train_sequences.shape[0])
