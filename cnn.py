@@ -26,8 +26,8 @@ test_sequences = tokenizer.texts_to_sequences(X_test)
 print('Tokenization finished!')
 
 print('Pad sequences (samples x time)')
-train_sequences = sequence.pad_sequences(train_sequences, maxlen=30)
-test_sequences = sequence.pad_sequences(test_sequences, maxlen=30)
+train_sequences = sequence.pad_sequences(train_sequences)
+test_sequences = sequence.pad_sequences(test_sequences)
 print('train_sequences shape:', train_sequences.shape)
 print('test_sequences shape:', test_sequences.shape)
 
