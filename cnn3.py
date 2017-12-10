@@ -4,6 +4,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers.convolutional import Conv1D
 from keras.layers.convolutional import MaxPooling1D
+from keras.layers.embeddings import Embedding
 from keras.layers import LSTM
 from sklearn.externals import joblib
 
@@ -13,6 +14,7 @@ y = joblib.load('train_labels.sav')
 
 # CNN model
 model = Sequential()
+model.add(Embedding(50, 50, input_length=train_sequences.shape[1]))
 model.add(Conv1D(padding="same", kernel_size=3, filters=32, activation="relu"))
 model.add(MaxPooling1D(pool_size=2))
 model.add(LSTM(100))
