@@ -7,9 +7,9 @@ from keras.layers.convolutional import MaxPooling1D
 from keras.layers import LSTM
 from sklearn.externals import joblib
 
-train_sequences = joblib.load('train_features_FT_50.sav')
-test_sequences = joblib.load('test_feature_FT_50.sav')
-y = joblib.load('train_labels.sav')
+train_sequences = np.array(joblib.load('train_features_FT_50.sav'))
+test_sequences = np.array(joblib.load('test_feature_FT_50.sav'))
+y = np.array(joblib.load('train_labels.sav'))
 
 # CNN model
 model = Sequential()
