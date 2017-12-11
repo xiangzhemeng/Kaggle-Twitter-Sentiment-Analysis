@@ -3,8 +3,10 @@ import numpy as np
 import csv
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.layers.convolutional import Conv1D
+from keras.layers.convolutional import MaxPooling1D
 from keras.layers.embeddings import Embedding
-from keras.layers import LSTM
+from keras.layers import Flatten
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 
@@ -36,10 +38,13 @@ train_sequences = train_sequences[indices]
 y = np.array(int(2500000/2) * [0] + int(2500000/2) * [1])
 y = y[indices]
 
-# CNN Model: Embedding + LSTM + Dense layer
+# CNN Model: Embedding + Convolution + Dense layers with sigmoid and reLu activation
 model = Sequential()
 model.add(Embedding(max_features+1, 50, input_length=train_sequences.shape[1]))
-model.add(LSTM(100, dropout_W=0.2, dropout_U=0.2))
+model.add(Conv1D(padding="same", kernel_size=3, filters=32, activation="relu"))
+model.add(MaxPooling1D(pool_size=2))
+model.add(Flatten())
+model.add(Dense(250, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 print(model.summary())
@@ -60,7 +65,7 @@ for x in y_pred_origin:
 print(y_pred)
 
 y_pred = 1 - 2 * np.array(y_pred)
-with open('cnn_submission_model2.csv', 'w') as csvfile:
+with open('cnn_submission1.csv', 'w') as csvfile:
     fieldnames = ['Id', 'Prediction']
     writer = csv.DictWriter(csvfile, delimiter=",", fieldnames=fieldnames)
     writer.writeheader()
