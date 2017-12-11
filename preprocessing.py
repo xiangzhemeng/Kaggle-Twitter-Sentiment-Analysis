@@ -1,19 +1,21 @@
 import itertools
+import enchant
 
-dico = {}
+dict = {}
 corpus = open('tweet_typo_corpus.txt', 'rb')
 for word in corpus:
     word = word.decode('utf8')
     word = word.split()
-    dico[word[1]] = word[3]
+    dict[word[1]] = word[3]
 corpus.close()
 
 def remove_repetitions(tweet):
+    dict_us = enchant.Dict('en_US')
     tweet=tweet.split()
     for i in range(len(tweet)):
         tweet[i]=''.join(''.join(s)[:2] for _, s in itertools.groupby(tweet[i])).replace('#', '')
         if len(tweet[i])>0:
-            if not d.check(tweet[i]):
+            if not dict_us.check(tweet[i]):
                 tweet[i] = ''.join(''.join(s)[:1] for _, s in itertools.groupby(tweet[i])).replace('#', '')
     tweet = ' '.join(tweet)
     return tweet
@@ -21,8 +23,8 @@ def remove_repetitions(tweet):
 def spelling_correction(tweet):
     tweet = tweet.split()
     for i in range(len(tweet)):
-        if tweet[i] in dico.keys():
-            tweet[i] = dico[tweet[i]]
+        if tweet[i] in dict.keys():
+            tweet[i] = dict[tweet[i]]
     tweet = ' '.join(tweet)
     return tweet
 
