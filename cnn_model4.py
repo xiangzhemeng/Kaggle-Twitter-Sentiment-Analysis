@@ -14,6 +14,7 @@ X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_spelling_corr.pkl")
 X_train = np.array(X_train['tweet'])
 X_test = pd.read_pickle("test_tweets_after_preprocess_spelling_corr.pkl")
 X_test = np.array(X_test['tweet'])
+print("Data loading finished!")
 
 tokenizer = Tokenizer(filters='')
 tokenizer.fit_on_texts(X_train)
@@ -65,7 +66,7 @@ for x in y_pred_origin:
 print(y_pred)
 
 y_pred = 1 - 2 * np.array(y_pred)
-with open('cnn_submission1.csv', 'w') as csvfile:
+with open('cnn_submission_model4.csv', 'w') as csvfile:
     fieldnames = ['Id', 'Prediction']
     writer = csv.DictWriter(csvfile, delimiter=",", fieldnames=fieldnames)
     writer.writeheader()
