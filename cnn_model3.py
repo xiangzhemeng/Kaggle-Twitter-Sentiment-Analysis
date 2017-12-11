@@ -9,16 +9,11 @@ from keras.layers.embeddings import Embedding
 from keras.layers import LSTM
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
-from preprocessing import clean
 
-X_train = pd.read_pickle("train_tweets_after_preprocess_cnn.pkl")
-X_train['tweet'] = X_train['tweet'].apply(lambda tweet: clean(tweet))
-X_train.to_pickle("train_tweets_after_preprocess_cnn_spelling_corr.pkl")
+X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_spelling_corr.pkl")
 X_train = np.array(X_train['tweet'])
 print("train preprocessing finished!")
-X_test = pd.read_pickle("test_tweets_after_preprocess.pkl")
-X_test['tweet'] = X_test['tweet'].apply(lambda tweet: clean(tweet))
-X_test.to_pickle("test_tweets_after_preprocess_spelling_corr.pkl")
+X_test = pd.read_pickle("test_tweets_after_preprocess_spelling_corr.pkl")
 X_test = np.array(X_test['tweet'])
 print("test preprocessing finished!")
 
