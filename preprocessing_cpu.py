@@ -1,4 +1,5 @@
 import pandas as pd
+import itertools
 import enchant
 
 dict = {}
