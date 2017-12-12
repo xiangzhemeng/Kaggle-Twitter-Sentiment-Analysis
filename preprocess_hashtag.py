@@ -32,7 +32,7 @@ def split_hashtag_to_words(tag):
     return word_list
 
 def clean(tweet):
-    tweet = tweet.append(clean_hashtag(tweet))
+    tweet = tweet + ' ' + clean_hashtag(tweet)
     return tweet.strip().lower()
 
 def parallelize_dataframe(df, func):
