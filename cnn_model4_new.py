@@ -51,7 +51,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 print(model.summary())
 print("Build model finished!")
 
-model.fit(train_sequences, y, validation_split=0.1, epochs=1, batch_size=128, verbose=1, shuffle=True)
+model.fit(train_sequences, y, validation_split=0.1, epochs=2, batch_size=128, verbose=1, shuffle=True)
 print("Fit model finished!")
 
 y_pred_origin = model.predict_proba(test_sequences)
