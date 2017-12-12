@@ -86,4 +86,4 @@ def multiply_columns(data):
 
 df_test = pd.read_pickle('origin.pkl')
 df_test = parallelize_dataframe(df_test, multiply_columns)
-df_train.to_pickle('test_after_preprocess_1.pkl')
+df_test.to_pickle('test_after_preprocess_1.pkl')
