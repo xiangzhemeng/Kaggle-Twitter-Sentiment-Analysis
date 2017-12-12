@@ -66,7 +66,7 @@ for x in y_pred_origin:
 print(y_pred)
 
 y_pred = 1 - 2 * np.array(y_pred)
-with open('cnn_submission_m4_newdata.csv', 'w') as csvfile:
+with open('cnn_submission_m4_epoch2.csv', 'w') as csvfile:
     fieldnames = ['Id', 'Prediction']
     writer = csv.DictWriter(csvfile, delimiter=",", fieldnames=fieldnames)
     writer.writeheader()
