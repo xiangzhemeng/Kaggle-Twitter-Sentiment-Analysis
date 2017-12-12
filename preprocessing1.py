@@ -84,8 +84,6 @@ def multiply_columns(data):
     data = tweets_preprocessing(data)
     return data
 
-df_kindle_book_review = pd.read_pickle('origin.pkl')
-df_kindle_book_review['rate'] = df_kindle_book_review['rate'].apply(lambda x: 4 if x in [1,2,3] else x)
-df_train = df_kindle_book_review.iloc[:900000]
-df_train = parallelize_dataframe(df_train, multiply_columns)
-df_train.to_pickle('train_after_preprocess_1.pkl')
+df_test = pd.read_pickle('origin.pkl')
+df_test = parallelize_dataframe(df_test, multiply_columns)
+df_train.to_pickle('test_after_preprocess_1.pkl')
