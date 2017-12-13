@@ -10,9 +10,9 @@ from keras.layers import Flatten
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 
-X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_new4.pkl")
+X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_7.pkl")
 X_train = np.array(X_train['tweet'])
-X_test = pd.read_pickle("test_tweets_after_preprocess_new4.pkl")
+X_test = pd.read_pickle("test_tweets_after_preprocess_7.pkl")
 X_test = np.array(X_test['tweet'])
 print("Data loading finished!")
 
@@ -68,7 +68,7 @@ for x in y_pred_origin:
 
 y_pred = 1 - 2 * np.array(y_pred)
 
-with open('cnn_model4.csv', 'w') as csvfile:
+with open('cnn_model4_data7.csv', 'w') as csvfile:
     fieldnames = ['Id', 'Prediction']
     writer = csv.DictWriter(csvfile, delimiter=",", fieldnames=fieldnames)
     writer.writeheader()
