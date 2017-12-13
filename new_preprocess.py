@@ -25,11 +25,17 @@ for word in corpus2:
     word = word.split()
     dict[word[1]] = word[3]
 corpus2.close()
+corpus3 = open('dico.txt', 'rb')
+for word in corpus3:
+    word = word.decode('utf8')
+    word = word.split()
+    dict[word[0]] = word[1]
+corpus3.close()
 
 
 def remove_repetitions(tweet):
     dict_us = enchant.Dict('en_US')
-    tweet=tweet.split()
+    tweet = tweet.split()
     for i in range(len(tweet)):
         tweet[i]=''.join(''.join(s)[:2] for _, s in itertools.groupby(tweet[i])).replace('#', '')
         if len(tweet[i])>0:
@@ -37,27 +43,6 @@ def remove_repetitions(tweet):
                 tweet[i] = ''.join(''.join(s)[:1] for _, s in itertools.groupby(tweet[i])).replace('#', '')
     tweet = ' '.join(tweet)
     return tweet
-
-def clean_hashtag(text):
-    words = []
-    tag_list = extract_hashtag(text)
-    for tag in tag_list:
-        words += split_hashtag_to_words(tag)
-
-    if len(words):
-        return (" ".join(words)).strip()
-    else:
-        return ""
-
-
-def extract_hashtag(text):
-    hash_list = ([re.sub(r"(\W+)$", "", i) for i in text.split() if i.startswith("#")])
-    return hash_list
-
-
-def split_hashtag_to_words(tag):
-    word_list = [w for w in e.segment(tag[1:]) if len(w) > 3]
-    return word_list
 
 def spelling_correction(tweet):
     tweet = tweet.split()
@@ -67,30 +52,88 @@ def spelling_correction(tweet):
     tweet = ' '.join(tweet)
     return tweet
 
+def emoji_transformation(tweet):
+    loves = ["<3", "♥"]
+    smilefaces = []
+    sadfaces = []
+    neutralfaces = []
+
+    eyes = ["8",":","=",";"]
+    nose = ["'","`","-",r"\\"]
+    for e in eyes:
+        for n in nose:
+            for s in ["\)", "d", "]", "}","p"]:
+                smilefaces.append(e+n+s)
+                smilefaces.append(e+s)
+            for s in ["\(", "\[", "{"]:
+                sadfaces.append(e+n+s)
+                sadfaces.append(e+s)
+            for s in ["\|", "\/", r"\\"]:
+                neutralfaces.append(e+n+s)
+                neutralfaces.append(e+s)
+            #reversed
+            for s in ["\(", "\[", "{"]:
+                smilefaces.append(s+n+e)
+                smilefaces.append(s+e)
+            for s in ["\)", "\]", "}"]:
+                sadfaces.append(s+n+e)
+                sadfaces.append(s+e)
+            for s in ["\|", "\/", r"\\"]:
+                neutralfaces.append(s+n+e)
+                neutralfaces.append(s+e)
+
+    smilefaces = list(set(smilefaces))
+    sadfaces = list(set(sadfaces))
+    neutralfaces = list(set(neutralfaces))
+
+    t = []
+    for w in tweet.split():
+        if w in loves:
+            t.append("<love>")
+        elif w in smilefaces:
+            t.append("<happy>")
+        elif w in neutralfaces:
+            t.append("<neutral>")
+        elif w in sadfaces:
+            t.append("<sad>")
+        else:
+            t.append(w)
+    newTweet = " ".join(t)
+    return newTweet
+
+def filter_digits(tweet):
+    t = []
+    for w in tweet.split():
+        # If w is a number
+        try:
+            float(w)
+            t.append("")
+        # Otherwise
+        except:
+            t.append(w)
+    newTweet = " ".join(t)
+    return newTweet
+
+
 def clean(tweet):
-    tweet = re.sub(r'n\'t', ' not', tweet)
-    tweet = re.sub(r'i\'m', 'i am', tweet)
-    tweet = re.sub(r'\'re', ' are', tweet)
-    tweet = re.sub(r'it\'s', 'it is', tweet)
-    tweet = re.sub(r'that\'s', 'that is', tweet)
-    tweet = re.sub(r'\'ll', ' will', tweet)
-    tweet = re.sub(r'\'l', ' will', tweet)
-    tweet = re.sub(r'\'ve', ' have', tweet)
-    tweet = re.sub(r'\'d', ' would', tweet)
-    tweet = re.sub(r'he\'s', 'he is', tweet)
-    tweet = re.sub(r'what\'s', 'what is', tweet)
-    tweet = re.sub(r'who\'s', 'who is', tweet)
-    tweet = re.sub(r'\'s', '', tweet)
+
+    tweet = re.sub(r"\'s", " \'s", tweet)
+    tweet = re.sub(r"\'ve", " \'ve", tweet)
+    tweet = re.sub(r"n\'t", " n\'t", tweet)
+    tweet = re.sub(r"\'re", " \'re", tweet)
+    tweet = re.sub(r"\'d", " \'d", tweet)
+    tweet = re.sub(r"\'ll", " \'ll", tweet)
     tweet = re.sub(r",", " , ", tweet)
     tweet = re.sub(r"!", " ! ", tweet)
     tweet = re.sub(r"\(", " \( ", tweet)
     tweet = re.sub(r"\)", " \) ", tweet)
     tweet = re.sub(r"\?", " \? ", tweet)
     tweet = re.sub(r"\s{2,}", " ", tweet)
-
-    tweet = tweet + ' ' + clean_hashtag(tweet)
     tweet = remove_repetitions(tweet)
     tweet = spelling_correction(tweet)
+    tweet = emoji_transformation(tweet)
+    tweet = filter_digits(tweet)
+
     return tweet.strip().lower()
 
 def parallelize_dataframe(df, func):
