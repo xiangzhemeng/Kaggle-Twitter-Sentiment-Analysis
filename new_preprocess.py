@@ -117,22 +117,24 @@ def filter_digits(tweet):
 
 def clean(tweet):
 
-    tweet = re.sub(r"\'s", " \'s", tweet)
-    tweet = re.sub(r"\'ve", " \'ve", tweet)
-    tweet = re.sub(r"n\'t", " n\'t", tweet)
-    tweet = re.sub(r"\'re", " \'re", tweet)
-    tweet = re.sub(r"\'d", " \'d", tweet)
-    tweet = re.sub(r"\'ll", " \'ll", tweet)
-    tweet = re.sub(r",", " , ", tweet)
-    tweet = re.sub(r"!", " ! ", tweet)
-    tweet = re.sub(r"\(", " \( ", tweet)
-    tweet = re.sub(r"\)", " \) ", tweet)
-    tweet = re.sub(r"\?", " \? ", tweet)
-    tweet = re.sub(r"\s{2,}", " ", tweet)
-    tweet = remove_repetitions(tweet)
-    tweet = spelling_correction(tweet)
-    tweet = emoji_transformation(tweet)
-    tweet = filter_digits(tweet)
+    tweet = re.sub(r"\'s", "is", tweet)
+    tweet = re.sub(r"\'ve", "have", tweet)
+    tweet = re.sub(r"n\'t", "not", tweet)
+    tweet = re.sub(r"\'re", "are", tweet)
+    #tweet = re.sub(r"\'d", " \'d", tweet)
+    tweet = re.sub(r"\'ll", "will", tweet)
+    re.sub(r"<user>", "", tweet)
+    tweet = re.sub(r"\.", "", tweet)
+    tweet = re.sub(r",", "", tweet)
+    tweet = re.sub(r"!", "", tweet)
+    tweet = re.sub(r"\(", "", tweet)
+    tweet = re.sub(r"\)", "", tweet)
+    tweet = re.sub(r"\?", "", tweet)
+    #tweet = re.sub(r"\s{2,}", " ", tweet)
+    #tweet = remove_repetitions(tweet)
+    #tweet = spelling_correction(tweet)
+    #tweet = emoji_transformation(tweet)
+    #tweet = filter_digits(tweet)
 
     return tweet.strip().lower()
 
@@ -149,12 +151,12 @@ def multiply_columns(data):
     return data
 
 
-X_test = pd.read_pickle("test_origin.pkl")
+X_test = pd.read_pickle("test_tweets_after_preprocess_new4.pkl")
 X_test = parallelize_dataframe(X_test, multiply_columns)
-X_test.to_pickle("test_tweets_after_preprocess_new4.pkl")
+X_test.to_pickle("test_tweets_after_preprocess_6.pkl")
 print("test preprocessing finished!")
 
-X_train = pd.read_pickle("train_origin.pkl")
+X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_new4.pkl")
 X_train = parallelize_dataframe(X_train, multiply_columns)
-X_train.to_pickle("train_tweets_after_preprocess_cnn_new4.pkl")
+X_train.to_pickle("train_tweets_after_preprocess_cnn_6.pkl")
 print("train preprocessing finished!")
