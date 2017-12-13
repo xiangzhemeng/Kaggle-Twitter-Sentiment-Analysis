@@ -9,7 +9,6 @@ from keras.layers.embeddings import Embedding
 from keras.layers import Flatten
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
-from keras.callbacks import EarlyStopping
 
 X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_new4.pkl")
 X_train = np.array(X_train['tweet'])
@@ -40,8 +39,6 @@ train_sequences = train_sequences[indices]
 y = np.array(int(2500000/2) * [0] + int(2500000/2) * [1])
 y = y[indices]
 
-earlyStopping = EarlyStopping(monitor = 'val_loss', patience = 2)
-
 # CNN Model
 model = Sequential()
 model.add(Embedding(max_features+1, 20, input_length=train_sequences.shape[1]))
@@ -54,7 +51,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 print(model.summary())
 print("Build model finished!")
 
-model.fit(train_sequences, y, validation_split=0.1, epochs=10, batch_size=128, verbose=1, shuffle=True, callbacks=[earlyStopping])
+model.fit(train_sequences, y, validation_split=0.1, epochs=1, batch_size=128, verbose=1, shuffle=True)
 
 print("Fit model finished!")
 
