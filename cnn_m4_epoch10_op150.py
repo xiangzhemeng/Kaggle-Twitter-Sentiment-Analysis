@@ -59,7 +59,7 @@ model.fit(train_sequences, y, validation_split=0.1, epochs=10, batch_size=128, v
 
 print("Fit model finished!")
 
-y_pred_origin = model.predict_proba(test_sequences)
+y_pred_origin = model.predict(test_sequences)
 print("Prediction finished!")
 print(y_pred_origin)
 y_pred = []
