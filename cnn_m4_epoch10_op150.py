@@ -11,9 +11,9 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 from keras.callbacks import EarlyStopping
 
-X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_new4.pkl")
+X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_new5.pkl")
 X_train = np.array(X_train['tweet'])
-X_test = pd.read_pickle("test_tweets_after_preprocess_new4.pkl")
+X_test = pd.read_pickle("test_tweets_after_preprocess_new5.pkl")
 X_test = np.array(X_test['tweet'])
 print("Data loading finished!")
 
@@ -71,7 +71,7 @@ for x in y_pred_origin:
 print(y_pred)
 
 y_pred = 1 - 2 * np.array(y_pred)
-with open('cnn_m4_epoch10_opsize150.csv', 'w') as csvfile:
+with open('cnn_m4_epoch10_opsize150_new.csv', 'w') as csvfile:
     fieldnames = ['Id', 'Prediction']
     writer = csv.DictWriter(csvfile, delimiter=",", fieldnames=fieldnames)
     writer.writeheader()
