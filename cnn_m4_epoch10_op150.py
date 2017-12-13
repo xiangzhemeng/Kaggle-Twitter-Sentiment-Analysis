@@ -40,7 +40,7 @@ train_sequences = train_sequences[indices]
 y = np.array(int(2500000/2) * [0] + int(2500000/2) * [1])
 y = y[indices]
 
-earlyStopping = EarlyStopping(monitor = 'val_loss', patience = 3)
+earlyStopping = EarlyStopping(monitor = 'val_loss', patience = 2)
 
 # CNN Model: Embedding + Convolution + Dense layers with sigmoid and reLu activation
 model = Sequential()
