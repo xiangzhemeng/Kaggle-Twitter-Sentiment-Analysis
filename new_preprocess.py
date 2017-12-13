@@ -154,12 +154,12 @@ def multiply_columns(data):
     return data
 
 
-X_test = pd.read_pickle("test_tweets_after_preprocess_new4.pkl")
+X_test = pd.read_pickle("test_tweets_after_preprocess_6.pkl")
 X_test = parallelize_dataframe(X_test, multiply_columns)
-X_test.to_pickle("test_tweets_after_preprocess_6.pkl")
+X_test.to_pickle("test_tweets_after_preprocess_7.pkl")
 print("test preprocessing finished!")
 
-X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_new4.pkl")
+X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_6.pkl")
 X_train = parallelize_dataframe(X_train, multiply_columns)
-X_train.to_pickle("train_tweets_after_preprocess_cnn_6.pkl")
+X_train.to_pickle("train_tweets_after_preprocess_cnn_7.pkl")
 print("train preprocessing finished!")
