@@ -12,9 +12,9 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 #from keras.callbacks import EarlyStopping
 
-X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_7.pkl")
+X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_8.pkl")
 X_train = np.array(X_train['tweet'])
-X_test = pd.read_pickle("test_tweets_after_preprocess_7.pkl")
+X_test = pd.read_pickle("test_tweets_after_preprocess_8.pkl")
 X_test = np.array(X_test['tweet'])
 print("Data loading finished!")
 
@@ -43,7 +43,7 @@ y = y[indices]
 
 #earlyStopping = EarlyStopping(monitor = 'val_loss', patience = 2)
 
-# CNN Model1
+### Model 1 ###
 print("Model1 start!")
 model = Sequential()
 model.add(Embedding(max_features+1, 50, input_length=train_sequences.shape[1]))
@@ -64,7 +64,7 @@ pickle.dump(train, open('train_model1.txt', 'wb'))
 pickle.dump(test, open('test_model1.txt', 'wb'))
 print("Model1 finished!")
 
-# CNN Model2
+### Model 2 ###
 print("Model2 start!")
 model = Sequential()
 model.add(Embedding(max_features+1, 20, input_length=train_sequences.shape[1]))
@@ -87,7 +87,7 @@ pickle.dump(train, open('train_model2.txt', 'wb'))
 pickle.dump(test, open('test_model2.txt', 'wb'))
 print("Model2 finished!")
 
-# CNN Model3
+### Model 3 ###
 print("Model3 start!")
 model = Sequential()
 model.add(Embedding(max_features+1, 50, input_length=train_sequences.shape[1]))
@@ -107,7 +107,7 @@ pickle.dump(train, open('train_model3.txt', 'wb'))
 pickle.dump(test, open('test_model3.txt', 'wb'))
 print("Model3 finished!")
 
-# CNN Model4
+### Model 4 ###
 print("Model4 start!")
 model = Sequential()
 model.add(Embedding(max_features+1, 50, input_length=train_sequences.shape[1]))

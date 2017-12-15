@@ -26,7 +26,7 @@ model = xgb.XGBClassifier().fit(train, y)
 y_pred = model.predict(test)
 y_pred = 1 - 2 * y_pred
 
-with open('run_submission2.csv', 'w') as file:
+with open('run1.csv', 'w') as file:
     fieldnames = ['Id', 'Prediction']
     writer = csv.DictWriter(file, delimiter=",", fieldnames=fieldnames)
     writer.writeheader()
