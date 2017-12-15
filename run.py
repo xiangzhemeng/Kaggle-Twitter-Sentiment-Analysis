@@ -1,6 +1,6 @@
 import numpy as np
-import csv
 import pickle
+import csv
 import xgboost as xgb
 
 train1 = pickle.load(open("train_model1.txt", "rb"))
@@ -26,7 +26,7 @@ model = xgb.XGBClassifier().fit(train, y)
 y_pred = model.predict(test)
 y_pred = 1 - 2 * y_pred
 
-with open('run_submission.csv', 'w') as file:
+with open('run_submission2.csv', 'w') as file:
     fieldnames = ['Id', 'Prediction']
     writer = csv.DictWriter(file, delimiter=",", fieldnames=fieldnames)
     writer.writeheader()
