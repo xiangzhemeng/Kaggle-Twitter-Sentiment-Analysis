@@ -12,9 +12,9 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 #from keras.callbacks import EarlyStopping
 
-X_train = pd.read_pickle("train_tweets_after_preprocess_cnn_8.pkl")
+X_train = pd.read_pickle("train_rank1.pkl")
 X_train = np.array(X_train['tweet'])
-X_test = pd.read_pickle("test_tweets_after_preprocess_8.pkl")
+X_test = pd.read_pickle("test_rank1.pkl")
 X_test = np.array(X_test['tweet'])
 print("Data loading finished!")
 
