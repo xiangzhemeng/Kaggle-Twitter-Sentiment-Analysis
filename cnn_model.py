@@ -58,10 +58,11 @@ print("Build model finished!")
 model.fit(train_sequences, y, validation_split=0.1, epochs=1, batch_size=128, verbose=1, shuffle=True)
 print("Fit model finished!")
 
-y_pred1 = model.predict(test_sequences)
+train = model.predict(train_sequences, batch_size=128)
+test = model.predict(test_sequences)
+pickle.dump(train, open('train_model1.txt', 'wb'))
+pickle.dump(test, open('test_model1.txt', 'wb'))
 print("Model1 finished!")
-
-pickle.dump(y_pred1, open('model1.txt', 'wb'))
 
 # CNN Model2
 print("Model2 start!")
@@ -80,10 +81,11 @@ model.fit(train_sequences, y, validation_split=0.1, epochs=1, batch_size=128, ve
 
 print("Fit model finished!")
 
-y_pred2 = model.predict(test_sequences)
+train = model.predict(train_sequences, batch_size=128)
+test = model.predict(test_sequences)
+pickle.dump(train, open('train_model2.txt', 'wb'))
+pickle.dump(test, open('test_model2.txt', 'wb'))
 print("Model2 finished!")
-
-pickle.dump(y_pred2, open('model2.txt', 'wb'))
 
 # CNN Model3
 print("Model3 start!")
@@ -99,10 +101,11 @@ model.fit(train_sequences, y, validation_split=0.1, epochs=1, batch_size=128, ve
 
 print("Fit model finished!")
 
-y_pred3 = model.predict(test_sequences)
+train = model.predict(train_sequences, batch_size=128)
+test = model.predict(test_sequences)
+pickle.dump(train, open('train_model3.txt', 'wb'))
+pickle.dump(test, open('test_model3.txt', 'wb'))
 print("Model3 finished!")
-
-pickle.dump(y_pred3, open('model3.txt', 'wb'))
 
 # CNN Model4
 print("Model4 start!")
@@ -121,8 +124,9 @@ model.fit(train_sequences, y, validation_split=0.1, epochs=1, batch_size=128, ve
 
 print("Fit model finished!")
 
-y_pred4 = model.predict(test_sequences)
+train = model.predict(train_sequences, batch_size=128)
+test = model.predict(test_sequences)
+pickle.dump(train, open('train_model4.txt', 'wb'))
+pickle.dump(test, open('test_model4.txt', 'wb'))
 print("Model4 finished!")
-
-pickle.dump(y_pred4, open('model4.txt', 'wb'))
 
