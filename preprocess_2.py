@@ -4,13 +4,10 @@ import itertools
 import enchant
 import multiprocessing
 from multiprocessing import Pool
-from segment import Analyzer
 import regex as re
 
 num_partitions = multiprocessing.cpu_count()
 num_cores = multiprocessing.cpu_count()
-
-e = Analyzer(file_dir='en')
 
 dict = {}
 corpus1 = open('tweet_typo_corpus.txt', 'rb')
