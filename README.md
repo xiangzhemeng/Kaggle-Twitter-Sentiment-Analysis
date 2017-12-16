@@ -44,13 +44,13 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
 * [Gensim] (3.2.0) - Install Gensim library 
 
     ```sh
-    $ sudo install gensim
+    $ sudo pip3 install gensim
     ```
 
 * [FastText] (0.8.3) - Install FastText implementation
 
     ```sh
-    $ pip install fasttext
+    $ sudo pip3 install fasttext
     ```
 
 * [NLTK] (3.2.5) - Install NLTK and download all packages
@@ -72,7 +72,7 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
     $ sudo pip3 install tensorflow
     
     // With GPU version
-    $ sudo pip3 install tensorflow
+    $ sudo pip3 install tensorflow-gpu
     ```
 
 * [Keras] (1.4.0) - Install Keras
@@ -90,22 +90,22 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
 
 ### Folder / Files
 
-* data_loading.py
+* `data_loading.py`
     helper function for loading the original dataset
 
-* segment.py
+* `segment.py`
     helper function for preprocessing steps
 
-* data_preprocessing.py
+* `data_preprocessing.py`
     Contains the details of all preprocessing steps
 
-* model_training.py
+* `model_training.py`
     Contains the details of the 3 CNN models
 
-* run.py
+* `run.py`
     Load the pickled neural network models + fits the obtained results with XGBoost + Creates the Kaggle csv submission
     
-* data
+* `data`
     This folder contains the necessary metadata and intermediate files while running our scripts.
     
     - `tweets`: Contain the original train and test dataset downloaded from Kaggle.
@@ -114,14 +114,14 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
     - `xgboost`: Contain the intermediate output files of CNN model and there are the input of XGboost model.
     - `output` : Contain output file of kaggle format from `run.py` 
 
-    Note: `tweets` and `dictionary` are essential for running the scripts.
+    Note: The files inside `tweets` and `dictionary` are essential for running the scripts.
     Download [tweets and dictionary](http://nlp.stanford.edu/data/glove.twitter.27B.zip) 
     Then, unzip the downloaded file and move the extracted files in `data/` directory.
     
     If you want to skip the preprocess step and CNN training step, download [preprocessed data and pretrained model](http://nlp.stanford.edu/data/glove.twitter.27B.zip).
     Then, unzip the downloaded file and move the extracted files in `data/` directory.
 
-* othermodels
+* `othermodels`
 
     The notebooks in this folder are the models we explored, before coming out the best model. 
 
@@ -143,25 +143,22 @@ Here are our steps from original dataset to kaggle submission file in order.
 - Generate submission file
 
 
-First, make sure all the essential data is put into data/ directory
+**First**, make sure all the essential data is put into data/ directory
 
-Second, there are two options to generate Kaggle submission file.
+**Second**, there are two options to generate Kaggle submission file.
 
-   -if you want to run all the steps from scratch, execute run.py with -m agrument "all"
+   -if you want to run all the steps from scratch, execute run.py with -m argument "all"
 
-    ```sh
         $ python3 run.py -m all
-    ```
     
-  Note: our preprocessing step require larges amount of CPU resource. It is a multiprocessing step, and will occupy all the     cores of CPU. It took 3 hours to finish this step on 24  vCPUs instance on GCP and half hour more to finish CNN model         training step with NVIDIA P100.
+  Note: our preprocessing step require larges amount of CPU resource. It is a multiprocessing step, and will occupy all the     cores of CPU. It took 3 hours to finish this step on 24  vCPUs instance on GCP and half hour more to finish CNN model training step with NVIDIA P100.
 
-   -if you want to skip preprocessing step and CNN model training step, execute run.py with -m agrument "xgboost"
+   -if you want to skip preprocessing step and CNN model training step, execute run.py with -m argument "xgboost"
 
-    ```sh
         $ python3 run.py -m xgboost
-    ```
+    
 
-Finally, you can find "prediction.csv" in data/output directory
+**Finally**, you can find `prediction.csv` in data/output directory
 
 ### Contributors
 - Sung Lin Chan
