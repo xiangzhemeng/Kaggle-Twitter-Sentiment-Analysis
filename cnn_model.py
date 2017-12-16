@@ -10,7 +10,8 @@ from keras.layers import LSTM
 from keras.layers import Flatten
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
-#from keras.callbacks import EarlyStopping
+
+np.random.seed(0)
 
 X_train = pd.read_pickle("train_rank1.pkl")
 X_train = np.array(X_train['tweet'])
@@ -41,7 +42,7 @@ train_sequences = train_sequences[indices]
 y = np.array(int(2500000/2) * [0] + int(2500000/2) * [1])
 y = y[indices]
 
-#earlyStopping = EarlyStopping(monitor = 'val_loss', patience = 2)
+np.random.seed(1)
 
 ### Model 1 ###
 print("Model1 start!")
@@ -63,6 +64,8 @@ test = model.predict(test_sequences)
 pickle.dump(train, open('train_model1.txt', 'wb'))
 pickle.dump(test, open('test_model1.txt', 'wb'))
 print("Model1 finished!")
+
+np.random.seed(2)
 
 ### Model 2 ###
 print("Model2 start!")
@@ -87,6 +90,8 @@ pickle.dump(train, open('train_model2.txt', 'wb'))
 pickle.dump(test, open('test_model2.txt', 'wb'))
 print("Model2 finished!")
 
+np.random.seed(3)
+
 ### Model 3 ###
 print("Model3 start!")
 model = Sequential()
@@ -106,6 +111,8 @@ test = model.predict(test_sequences)
 pickle.dump(train, open('train_model3.txt', 'wb'))
 pickle.dump(test, open('test_model3.txt', 'wb'))
 print("Model3 finished!")
+
+np.random.seed(4)
 
 ### Model 4 ###
 print("Model4 start!")
