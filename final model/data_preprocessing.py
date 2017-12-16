@@ -42,12 +42,12 @@ def remove_number(tweet):
 
 dict = {}
 
-corpus1 = open('dictionary/tweet_typo_corpus.txt', 'rb')
+corpus1 = open('data/dictionary/tweet_typo_corpus.txt', 'rb')
 for term in corpus1:
     term = term.decode('utf8').split()
     dict[term[0]] = term[1]
 
-corpus2 = open('dictionary/text_correction.txt', 'rb')
+corpus2 = open('data/dictionary/text_correction.txt', 'rb')
 for term in corpus2:
     term = term.decode('utf8').split()
     dict[term[1]] = term[3]
@@ -97,14 +97,18 @@ def multiply_columns(data):
     data['tweet'] = data['tweet'].apply(lambda x: clean(x))
     return data
 
-print("Test data preprocessing start!")
-X_test = pd.read_pickle("test_origin.pkl")
-X_test = parallelize_dataframe(X_test, multiply_columns)
-X_test.to_pickle("test_clean.pkl")
-print("Test data preprocessing finish!")
+def runn_preprocessing():
+    print("Test data preprocessing start!")
+    X_test = pd.read_pickle("data/pickles/test_origin.pkl")
+    X_test = parallelize_dataframe(X_test, multiply_columns)
+    X_test.to_pickle("test_clean.pkl")
+    print("Test data preprocessing finish!")
 
-print("Train data preprocessing start!")
-X_train = pd.read_pickle("train_origin.pkl")
-X_train = parallelize_dataframe(X_train, multiply_columns)
-X_train.to_pickle("train_clean.pkl")
-print("Train data preprocessing finish!")
+    print("Train data preprocessing start!")
+    X_train = pd.read_pickle("data/pickles/train_origin.pkl")
+    X_train = parallelize_dataframe(X_train, multiply_columns)
+    X_train.to_pickle("train_clean.pkl")
+    print("Train data preprocessing finish!")
+
+if __name__ == "__main__":
+    runn_preprocessing()
