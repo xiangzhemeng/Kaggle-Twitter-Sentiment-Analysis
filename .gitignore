@@ -3,4 +3,5 @@
 *.bin
 *.vec
 *.xml
-data/
+.idea/
+data/*
