@@ -31,9 +31,7 @@ All the scripts in this project ran in Python 3.5.2, the generic version on GCP 
  
 The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, there are newer version of CUDA and cuDNN at this time, we use the stable versions that are recommended by the official website of Tensorflow. For more information and installation guide about how to set up GPU environment for Tensorflow, please see [here](https://www.tensorflow.org/install/install_linux)
 
- 
 
-### Libraries
 
 * [Scikit-Learn] (0.19.1）- Install scikit-learn library with pip
 
@@ -88,27 +86,27 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
     ```
 
 
-### Folder / Files
+## Folder / Files
 
-* `segmenter.py`
-    helper function for preprocessing steps
+* `segmenter.py`: <br/>
+    helper function for preprocessing step
 
-* `data_loading.py`
+* `data_loading.py`: <br/>
     helper function for loading the original dataset and output pandas dataframe object as pickles.
 
-* `data_preprocessing.py`
+* `data_preprocessing.py`: <br/>
     Module of preprocessing. Take output of `data_loading.py` and output preprocessed tweets
 
-* `cnn_training.py`
+* `cnn_training.py`: <br/>
     Module of three cnn models The the output of `data_preprocessing.py` and generate result as input of `xgboost_training.py`
     
-* `xgboost_training.py`
+* `xgboost_training.py`: <br/>
     Module of xgboost model. Take the output of `cnn_training.py` and generate the prediction result.
 
-* `run.py`
+* `run.py`: <br/>
     Script for running the modules, `data_loading.py`, `data_preprocessing.py`, `cnn_training.py` and `xgboost_training.py`.
     
-* `data`
+* `data`: <br/>
     This folder contains the necessary metadata and intermediate files while running our scripts.
     
     - `tweets`: Contain the original train and test dataset downloaded from Kaggle.
@@ -124,25 +122,25 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
     If you want to skip the preprocess step and CNN training step, download [preprocessed data and pretrained model](http://nlp.stanford.edu/data/glove.twitter.27B.zip).
     Then, unzip the downloaded file and move the extracted files in `data/` directory.
 
-* `othermodels`
+* `othermodels`: <br/>
 
-    The notebooks in this folder are the models we explored, before coming out the best model. 
+    The files in this folder are the models we explored, before coming out the best model.
 
     - `lr_with_glove.ipynb`: This notebook is the classifier using logistic regression model and the word representation method is GloVE. Each was represented by the average of the sum of each word and fit into the logistic regression.
 
-    - `nueral_network_without_WE.ipynb`: This notebook is the classifier using NN model. The word representation is FastText english pre-trained model. Each tweets was represented by the average of the sum of each word and fit into the NN model.
+    - `fastText_model.py`: This is the classifier using FastText. The word representation is FastText english pre-trained model.
 
-    - `SVM_with_TFIDF.ipynb`: This notebook is the classifier using support vector machine. The word representation is TF-IDF by using Scikit-Learn built-in method.
+    - `svm_model.py`: This is the classifier using support vector machine. The word representation is TF-IDF by using Scikit-Learn built-in method.
 
 
-### Reproduce Our Best Score on Kaggle
+## Reproduce Our Best Score on Kaggle
 
-Here are our steps from original dataset to kaggle submission file in order. We had modulized each step into .py file, they can be executed individaully. For your convience, we provide `run.py` which could run the modules with simple command.
+Here are our steps from original dataset to kaggle submission file in order. We had modulized each step into .py file, they can be executed individually. For your convenience, we provide `run.py` which could run the modules with simple command.
 
-- Transform dataset to pandas dataframe - `data_loading.py` 
-- Preprocessing dataset - `data_preprocessing.py`
-- CNN model training  - `cnn_training.py`
-- XGboost model training and generate submission file - `xgboost_training.py`
+1. Transform dataset to pandas dataframe - `data_loading.py`
+2. Preprocessing dataset - `data_preprocessing.py`
+3. CNN model training  - `cnn_training.py`
+4. XGboost model training and generate submission file - `xgboost_training.py`
 
 
 **First**, make sure all the essential data is put into "data/" directory
@@ -169,7 +167,7 @@ Here are our steps from original dataset to kaggle submission file in order. We 
 
 **Finally**, you can find `prediction.csv` in "data/output" directory
 
-### Contributors
+## Contributors
 - Sung Lin Chan
 - Xiangzhe Meng
 - Süha Kagan Köse

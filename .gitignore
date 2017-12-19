@@ -2,4 +2,5 @@
 *.ipynb_checkpoints
 *.bin
 *.vec
+*.xml
 data/
