@@ -3,4 +3,6 @@
 *.bin
 *.vec
 *.xml
-data/
+**/.idea
+.python-version
+data/**
