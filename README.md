@@ -116,17 +116,17 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
     - `output` : Contain output file of kaggle format from `run.py` 
 
     Note: The files inside `tweets` and `dictionary` are essential for running the scripts.
-    Download [tweets and dictionary](http://nlp.stanford.edu/data/glove.twitter.27B.zip) 
-    Then, unzip the downloaded file and move the extracted files in `data/` directory.
+    Download [tweets and dictionary](https://www.dropbox.com/s/pmwewfpcfqdrmz5/Archive.zip)
+    Then, unzip the downloaded file and move the extracted `tweets` and `dictionary` folder in `data/` directory.
     
-    If you want to skip the preprocess step and CNN training step, download [preprocessed data and pretrained model](http://nlp.stanford.edu/data/glove.twitter.27B.zip).
-    Then, unzip the downloaded file and move the extracted files in `data/` directory.
+    If you want to skip the preprocess step and CNN training step, download [preprocessed data and pretrained model](https://www.dropbox.com/s/pmwewfpcfqdrmz5/Archive.zip).
+    Then, unzip the downloaded file and move all the extracted folders  in `data/` directory.
 
 * `othermodels`: <br/>
 
     The files in this folder are the models we explored, before coming out the best model.
 
-    - `lr_with_glove.ipynb`: This notebook is the classifier using logistic regression model and the word representation method is GloVE. Each was represented by the average of the sum of each word and fit into the logistic regression.
+    - `keras_nn_model.py`: This is the classifier using NN model and the word representation method is GloVE. Each was represented by the average of the sum of each word and fit into NN model.
 
     - `fastText_model.py`: This is the classifier using FastText. The word representation is FastText english pre-trained model.
 
