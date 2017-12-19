@@ -44,7 +44,7 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
 * [Gensim] (3.2.0) - Install Gensim library 
 
     ```sh
-    $ sudo pip3 install gensim
+    $ sudo pip3 install gensim
     ```
 
 * [FastText] (0.8.3) - Install FastText implementation
@@ -90,20 +90,23 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
 
 ### Folder / Files
 
-* `data_loading.py`
-    helper function for loading the original dataset and save 
-
 * `segmenter.py`
     helper function for preprocessing steps
 
-* `data_preprocessing.py`
-    Contains the details of all preprocessing steps and output 
+* `data_loading.py`
+    helper function for loading the original dataset and output pandas dataframe object as pickles.
 
-* `model_training.py`
-    Contains the details of the 3 CNN models
+* `data_preprocessing.py`
+    Module of preprocessing. Take output of `data_loading.py` and output preprocessed tweets
+
+* `cnn_training.py`
+    Module of three cnn models The the output of `data_preprocessing.py` and generate result as input of `xgboost_training.py`
+    
+* `xgboost_training.py`
+    Module of xgboost model. Take the output of `cnn_training.py` and generate the prediction result.
 
 * `run.py`
-    Load the pickled neural network models + fits the obtained results with XGBoost + Creates the Kaggle csv submission
+    Script for running the modules, `data_loading.py`, `data_preprocessing.py`, `cnn_training.py` and `xgboost_training.py`.
     
 * `data`
     This folder contains the necessary metadata and intermediate files while running our scripts.
@@ -134,16 +137,15 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
 
 ### Reproduce Our Best Score on Kaggle
 
-Here are our steps from original dataset to kaggle submission file in order.
+Here are our steps from original dataset to kaggle submission file in order. We had modulized each step into .py file, they can be executed individaully. For your convience, we provide `run.py` which could run the modules with simple command.
 
-- Transform dataset to pandas dataframe
-- Preprocessing dataset
-- CNN model training
-- XGboost model training
-- Generate submission file
+- Transform dataset to pandas dataframe - `data_loading.py` 
+- Preprocessing dataset - `data_preprocessing.py`
+- CNN model training  - `cnn_training.py`
+- XGboost model training and generate submission file - `xgboost_training.py`
 
 
-**First**, make sure all the essential data is put into "data/" directory, if 
+**First**, make sure all the essential data is put into "data/" directory
 
 **Second**, there are three options to generate Kaggle submission file.
 
@@ -163,9 +165,9 @@ Here are our steps from original dataset to kaggle submission file in order.
 
         $ python3 run.py -m all
     
-  Note: our preprocessing step require larges amount of CPU resource. It is a multiprocessing step, and will occupy all the     cores of CPU. It took 3 hours to finish this step on 24  vCPUs instance on GCP and half hour more to finish CNN model training step with NVIDIA P100.
+  Note: our preprocessing step require larges amount of CPU resource. It is a multiprocessing step, and will occupy all the     cores of CPU. It took 1 hours to finish this step on 24  vCPUs instance on GCP and half hour more to finish CNN model training step with NVIDIA P100.
 
-**Finally**, you can find `prediction.csv` in data/output directory
+**Finally**, you can find `prediction.csv` in "data/output" directory
 
 ### Contributors
 - Sung Lin Chan
