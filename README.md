@@ -91,13 +91,13 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
 ### Folder / Files
 
 * `data_loading.py`
-    helper function for loading the original dataset
+    helper function for loading the original dataset and save 
 
-* `segment.py`
+* `segmenter.py`
     helper function for preprocessing steps
 
 * `data_preprocessing.py`
-    Contains the details of all preprocessing steps
+    Contains the details of all preprocessing steps and output 
 
 * `model_training.py`
     Contains the details of the 3 CNN models
@@ -143,20 +143,27 @@ Here are our steps from original dataset to kaggle submission file in order.
 - Generate submission file
 
 
-**First**, make sure all the essential data is put into data/ directory
+**First**, make sure all the essential data is put into "data/" directory, if 
 
-**Second**, there are two options to generate Kaggle submission file.
+**Second**, there are three options to generate Kaggle submission file.
 
+   -if you want to skip preprocessing step and CNN model training step, execute run.py with -m argument "xgboost"
+
+        $ python3 run.py -m xgboost
+   
+   Note: Make sure that there are `test_model1.txt`, `test_model2.txt`, `test_model3.txt`, `train_model1.txt`, `train_model2.txt` and `train_model3.txt` in "data/xgboost in order to launch run.py successfully.
+   
+   -if you want to skip preprocessing step and start from CNN model training setp, execute run.py with -m argument "cnn"
+   
+        $ python3 run.py -m cnn
+   
+   Note: Make sure that there are `train_clean.pkl` and `test_clean.pkl`  in "data/pickles in order to launch run.py            successfully.
+    
    -if you want to run all the steps from scratch, execute run.py with -m argument "all"
 
         $ python3 run.py -m all
     
   Note: our preprocessing step require larges amount of CPU resource. It is a multiprocessing step, and will occupy all the     cores of CPU. It took 3 hours to finish this step on 24  vCPUs instance on GCP and half hour more to finish CNN model training step with NVIDIA P100.
-
-   -if you want to skip preprocessing step and CNN model training step, execute run.py with -m argument "xgboost"
-
-        $ python3 run.py -m xgboost
-    
 
 **Finally**, you can find `prediction.csv` in data/output directory
 
