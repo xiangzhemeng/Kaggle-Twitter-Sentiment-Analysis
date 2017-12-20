@@ -145,7 +145,7 @@ Here are our steps from original dataset to kaggle submission file in order. We 
 
 **First**, make sure all the essential data is put into "data/" directory
 
-**Second**, there are three options to generate Kaggle submission file.
+**Second**, there are three options to generate Kaggle submission file. We recommand the first options, which takes less than 10 minutes to reproduct the result with pretrianed models.
 
    -if you want to skip preprocessing step and CNN model training step, execute run.py with -m argument "xgboost"
 
@@ -163,8 +163,8 @@ Here are our steps from original dataset to kaggle submission file in order. We 
 
         $ python3 run.py -m all
     
-  Note: our preprocessing step require larges amount of CPU resource. It is a multiprocessing step, and will occupy all the     cores of CPU. It took 1 hours to finish this step on 24  vCPUs instance on GCP and extra one and half hour more to finish CNN model training step with NVIDIA P100.
-
+  Note: our preprocessing step require larges amount of CPU resource. It is a multiprocessing step, and will occupy all the     cores of CPU. It took one hour to finish this step on 24  vCPUs instance on GCP and extra one and half hour more to finish CNN model training step with NVIDIA P100.
+  
 **Finally**, you can find `prediction.csv` in "data/output" directory
 
 ## Contributors
