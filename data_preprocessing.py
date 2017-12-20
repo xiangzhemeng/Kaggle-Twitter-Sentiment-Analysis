@@ -276,7 +276,7 @@ def multiply_columns(data):
 
 
 # Main function of data_preprocessing module
-def runn_preprocessing():
+def run_preprocessing():
     print(" == Enter into preprocessing step ==")
     print("Test data preprocessing start!")
     X_test = pd.read_pickle("data/pickles/test_origin.pkl")
@@ -294,4 +294,4 @@ def runn_preprocessing():
 
 
 if __name__ == "__main__":
-    runn_preprocessing()
+    run_preprocessing()
