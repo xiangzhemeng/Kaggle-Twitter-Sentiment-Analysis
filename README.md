@@ -115,11 +115,11 @@ The NVIDIA GPU CUDA version is 8.0 and the cuDNN version is v6.0. Although, ther
     - `xgboost`: Contain the intermediate output files of CNN model and there are the input of XGboost model.
     - `output` : Contain output file of kaggle format from `run.py` 
 
-    Note: The files inside `tweets` and `dictionary` are essential for running the scripts.
+    Note: The files inside `tweets` and `dictionary` are essential for running the scripts from scratch.
     Download [tweets and dictionary](https://www.dropbox.com/s/pmwewfpcfqdrmz5/Archive.zip)
     Then, unzip the downloaded file and move the extracted `tweets` and `dictionary` folder in `data/` directory.
     
-    If you want to skip the preprocess step and CNN training step, download [preprocessed data and pretrained model](https://www.dropbox.com/s/pmwewfpcfqdrmz5/Archive.zip).
+    If you want to skip the preprocessing step and CNN training step, download [preprocessed data and pretrained model](https://www.dropbox.com/s/pmwewfpcfqdrmz5/Archive.zip).
     Then, unzip the downloaded file and move all the extracted folders  in `data/` directory.
 
 * `othermodels`: <br/>
@@ -163,7 +163,7 @@ Here are our steps from original dataset to kaggle submission file in order. We 
 
         $ python3 run.py -m all
     
-  Note: our preprocessing step require larges amount of CPU resource. It is a multiprocessing step, and will occupy all the     cores of CPU. It took 1 hours to finish this step on 24  vCPUs instance on GCP and half hour more to finish CNN model training step with NVIDIA P100.
+  Note: our preprocessing step require larges amount of CPU resource. It is a multiprocessing step, and will occupy all the     cores of CPU. It took 1 hours to finish this step on 24  vCPUs instance on GCP and extra one and half hour more to finish CNN model training step with NVIDIA P100.
 
 **Finally**, you can find `prediction.csv` in "data/output" directory
 
