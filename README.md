@@ -1,8 +1,8 @@
-# Text Classification
+# Twitter Sentiment Analysis(Text classification)
 
 This repository is the final project of CS-433 Machine Learning Fall 2017 at EPFL. The private competition was hosted on Kaggle [EPFL ML Text Classification](https://www.kaggle.com/c/epfml17-text)
 we had a complete dataset of 2500000 tweets. One half of tweets are positive labels and the other half are negative labels Our task was to build a classifier to predict the test dataset of 10000 tweets. This README.md illustrates the 
-the implementation of the classifier, and present the procedure to reproduce our works. The details of our implementation were written in the [report].
+the implementation of the classifier, and present the procedure to reproduce our works. The details of our implementation were written in the report. Ultimately, we ranked **9th among 64 teams** on the leaderboard.
 
 ## Project Specification
 
